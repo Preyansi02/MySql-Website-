@@ -1,0 +1,164 @@
+Create Table queries:
+
+drop table customer cascade constraints;
+drop table product cascade constraints;
+drop table SalesItemLevel cascade constraints;
+drop table webpage cascade constraints;
+drop table promotion cascade constraints;
+
+CREATE TABLE Product
+(
+Product_ID INT,
+Product_Type VARCHAR (50),
+Qty_Sold INT,
+Qty_Available INT,
+Revenue NUMBER,
+PRIMARY KEY(Product_ID)
+);
+
+CREATE TABLE Customer
+(
+Customer_ID INT,
+
+Customer_Name VARCHAR (50),
+Customer_Address VARCHAR (50),
+Customer_Email VARCHAR (50),
+Customer_Phone NUMBER,
+PRIMARY KEY (Customer_ID)
+);
+
+CREATE TABLE SalesItemLevel
+(
+Order_ID INT,
+Product_ID INT,
+Order_Date timestamp,
+Revenue number,
+Customer_ID INT,
+PRIMARY KEY (Order_ID),
+FOREIGN KEY (Customer_ID) references Customer(Customer_ID),
+FOREIGN KEY (Product_ID) references Product(Product_ID)
+);
+
+create table Promotion
+(
+promotion_ID int,
+promotion_type varchar(100),
+promotion_amount number,
+customer_id int,
+PRIMARY KEY (Promotion_ID),
+FOREIGN KEY (Customer_ID) references Customer(Customer_ID)
+);
+
+create table Webpage
+(
+Webpage_ID int,
+Customer_ID int,
+Advertising_ID int,
+Promotion_ID int,
+PRIMARY KEY (Webpage_ID),
+FOREIGN KEY (Customer_ID) references Customer(Customer_ID),
+FOREIGN KEY (Promotion_ID) references Promotion(Promotion_ID)
+);
+
+Commit;
+
+
+
+
+
+drop table webpage cascade constraints;
+drop table promotion cascade constraints;
+drop table SalesItemLevel cascade constraints;
+drop table customer cascade constraints;
+drop table product cascade constraints;
+
+
+CREATE TABLE Product
+(
+Product_ID INT,
+Product_Type VARCHAR (50),
+Qty_Sold INT,
+Qty_Available INT,
+Revenue NUMBER,
+PRIMARY KEY(Product_ID)
+);
+
+
+insert into product values (1, 'Sports', 50, 300, 2500);
+insert into product values (2, 'Fashion', 100, 500, 3000);
+insert into product values (3, 'Cosmetics', 150, 600, 3750);
+insert into product values (4, 'Electronics', 80, 400, 8000);
+
+
+CREATE TABLE Customer
+(
+Customer_ID INT,
+Customer_Name VARCHAR (50),
+Customer_Address VARCHAR (50),
+Customer_Email VARCHAR (50),
+Customer_Phone NUMBER,
+PRIMARY KEY (Customer_ID)
+);
+
+
+insert into customer values (1, 'Jeff', 'Arbutus', 'jeff@gmail.com', 4431234567);
+insert into customer values (2, 'Ella', 'Catonsville', 'ella@gmail.com', 4431234568);
+insert into customer values (3, 'Karen', 'Arundel', 'karen@gmail.com', 4431234569);
+insert into customer values (4, 'Ben', 'Downtown', 'ben@gmail.com', 4431234570);
+
+
+CREATE TABLE SalesItemLevel
+(
+Order_ID INT,
+Product_ID INT,
+Order_Date timestamp,
+Revenue number,
+Customer_ID INT,
+PRIMARY KEY (Order_ID),
+FOREIGN KEY (Customer_ID) references Customer(Customer_ID),
+FOREIGN KEY (Product_ID) references Product(Product_ID)
+);
+
+
+insert into salesitemlevel values (1, 1,timestamp '2022-11-12 10:07:00.00' , 50, 1);
+insert into salesitemlevel values (2, 2,timestamp '2022-11-25 09:07:00.00' , 30,3 );
+insert into salesitemlevel values (3, 3,timestamp '2022-12-2 02:07:00.00', 25, 2);
+insert into salesitemlevel values (4, 4,timestamp '2022-12-7 08:07:00.00', 100,4);
+insert into salesitemlevel values (5, 4,timestamp '2022-12-7 08:07:00.00', 100,4);
+
+
+create table Promotion
+(
+promotion_ID int,
+promotion_type varchar(100),
+promotion_amount number,
+customer_id int,
+PRIMARY KEY (Promotion_ID),
+FOREIGN KEY (Customer_ID) references Customer(Customer_ID)
+);
+
+
+insert into promotion values (1, 'Free Shipping', 50, 3);
+insert into promotion values (2, 'Get $50 Off', 50, 2);
+insert into promotion values (3, 'Get $100 Off', 100, 1);
+insert into promotion values (4, 'Get $150 Off', 150, 4);
+
+
+create table Webpage
+(
+Webpage_ID varchar (10),
+Customer_ID int,
+Advertising_ID int,
+Promotion_ID int,
+PRIMARY KEY (Webpage_ID),
+FOREIGN KEY (Customer_ID) references Customer(Customer_ID),
+FOREIGN KEY (Promotion_ID) references Promotion(Promotion_ID)
+);
+
+
+insert into webpage values ('3-1-1',3 , 1, 1);
+insert into webpage values ('2-2-2', 2, 2, 2);
+insert into webpage values ('1-3-3', 1, 3, 3);
+insert into webpage values ('4-4-4',4 , 4, 4);
+
+commit;
